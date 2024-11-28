@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Raleway } from "next/font/google";
 import "./globals.css";
 import { TheHeader } from "@/components/theheader/theheader";
 import { TheFooter } from "@/components/thefooter/thefooter";
+import { Providers } from "@/components/providers";
+import Link from "next/link";
+
+const raleway = Raleway({ subsets: ["cyrillic", "latin"] });
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,7 +23,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Учим европейский португальский",
   description:
-    "Европейский портуральский для русскоговоряших. Учим слова и спряжения глаголов",
+    "Европейский портуральский для русскоговорящих. Учим слова и спряжения глаголов",
 };
 
 export default function RootLayout({
@@ -28,10 +33,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <TheHeader></TheHeader>
-        <>{children}</>
-        <TheFooter></TheFooter>
+      <body className={`${raleway.className}  page`}>
+        <Providers>
+          <TheHeader></TheHeader>
+          <>{children}</>
+          <TheFooter></TheFooter>
+        </Providers>
       </body>
     </html>
   );
